@@ -5,14 +5,15 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Mvc;
 using TA03;
 
 namespace ApiVerificacionSuministroOrden.Controllers
 {
     public class LoginController : ApiController
     {
-        [HttpPost]
-        public TA03.TA03 ConsultarTA03([FromBody] UsuarioCredentials credentials)
+        [System.Web.Http.HttpPost]
+        public HttpResponseMessage ConsultarTA03([FromBody] UsuarioCredentials credentials)
         {
             try
             {
@@ -21,23 +22,27 @@ namespace ApiVerificacionSuministroOrden.Controllers
                 UsuarioEmplSession.PasswordSistema = credentials.Password;
 
                 TA03_BLL obj = new TA03_BLL(UsuarioEmplSession);
-                TA03.TA03 UsuarioEmplSessionResp = new TA03.TA03() { Login = credentials.Usuario, PasswordSistema = credentials.Password };
-                // TA03.TA03 UsuarioEmplSessionResp = obj.obtenerTA03(UsuarioEmplSession.Login, UsuarioEmplSession.PasswordSistema);
+                TA03.TA03 UsuarioEmplSessionResp = UsuarioEmplSession;
+                //TA03.TA03 UsuarioEmplSessionResp = obj.obtenerTA03(UsuarioEmplSession.Login, UsuarioEmplSession.PasswordSistema);
 
                 if (UsuarioEmplSessionResp != null)
                 {
-                    return UsuarioEmplSessionResp;
+                    var response = new ApiResponse<TA03.TA03>(true, "Consulta exitosa", UsuarioEmplSessionResp);
+                    return Request.CreateResponse(HttpStatusCode.OK, response);
                 }
                 else
                 {
-                    return null;
-                } 
+                    var response = new ApiResponse<TA03.TA03>(false, "No se encontraron resultados", null);
+                    return Request.CreateResponse(HttpStatusCode.NotFound, response);
+                }
             }
             catch (Exception ex)
             {
-                throw new HttpResponseException(HttpStatusCode.InternalServerError);
+                // Aquí podrías devolver un mensaje de error específico en la respuesta si lo deseas
+                var errorResponse = new ApiResponse<TA03.TA03>(false, $"Error interno del servidor {ex.Message}", null);
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, errorResponse);
             }
         }
-
     }
+
 }
