@@ -12,7 +12,7 @@ namespace IIML01
     public class IIML01_BLL
     {
         const int cantBusqueda = 3;
-        public IIML GetDatosAdicionalesValidacion(string codigoBarra, string usuario, string password)
+        public IIML GetDatosProductoValidacion(string codigoBarra, string usuario, string password)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace IIML01
                 throw new Exception(exception.Message);
             }
         }
-        public IIML GetDatosAdicionalesValidacion2(string codigoBarra, string usuario, string password)
+        public IIML GetDatosProductoValidacion2(string codigoBarra, string usuario, string password)
         {
             try
             {
@@ -174,8 +174,8 @@ namespace IIML01
 
                     using (OdbcCommand command = new OdbcCommand(busqueda, conexion))
                     {
-                        command.Parameters.AddWithValue("@W8CODPROD", codigoBarra);
                         command.Parameters.AddWithValue("@W8ORDENP", numeroOrden);
+                        command.Parameters.AddWithValue("@W8CODPROD", codigoBarra);
 
                         using (OdbcDataReader reader = command.ExecuteReader())
                         {
@@ -260,6 +260,7 @@ namespace IIML01
 
                     using (OdbcCommand command = new OdbcCommand(busqueda, conexion))
                     {
+                        command.CommandTimeout = 600;
                         command.Parameters.AddWithValue("@W8ORDENP", numeroOrden); // Asignar valor del parámetro
                         using (OdbcDataReader reader = command.ExecuteReader())
                         {
@@ -269,7 +270,7 @@ namespace IIML01
                                 {
                                     if (!reader.IsDBNull(i) && !reader.IsDBNull(i + 1))
                                     {
-                                        productos.Add(new IIML() { codigoProducto = reader.GetString(i), nombre = reader.GetString(i + 1) });
+                                        productos.Add(new IIML() { codigoBarra = reader.GetString(i),  codigoProducto = reader.GetString(i), nombre = reader.GetString(i + 1) });
                                     }
                                 }
                             }

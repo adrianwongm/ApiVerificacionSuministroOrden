@@ -22,7 +22,9 @@ namespace ApiVerificacionSuministroOrden.Controllers
                 UsuarioEmplSession.PasswordSistema = credentials.Password;
 
                 TA03_BLL obj = new TA03_BLL(UsuarioEmplSession);
+                //Linea de prueba
                 TA03.TA03 UsuarioEmplSessionResp = UsuarioEmplSession;
+
                 //TA03.TA03 UsuarioEmplSessionResp = obj.obtenerTA03(UsuarioEmplSession.Login, UsuarioEmplSession.PasswordSistema);
 
                 if (UsuarioEmplSessionResp != null)

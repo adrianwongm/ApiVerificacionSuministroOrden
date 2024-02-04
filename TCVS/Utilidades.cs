@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace IIML01
+namespace TCVS
 {
     public class Utilidades
     {
@@ -31,7 +31,7 @@ namespace IIML01
             PROCESOBUSQUEDA3,
             PROCESOBUSQUEDAORDEN,
             PROCESOLISTASIMPLE,
-            PROCESOINSERCION
+            PROCESOINSERCION,
         };
         public enum MotoresString
         {
@@ -188,7 +188,7 @@ namespace IIML01
                         return node.Attributes["value"].Value;
                     case ParametrosString.PROCESOINSERCION:
                         node = doc.SelectSingleNode("/configuration/appSettings/add[@key='PROCESOINSERCION']");
-                        return node.Attributes["value"].Value;
+                        return node.Attributes["value"].Value; 
                     default:
                         node = doc.SelectSingleNode("");
                         break;

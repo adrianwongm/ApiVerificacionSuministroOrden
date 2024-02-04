@@ -319,6 +319,10 @@
       <Project>{58de0927-e153-4535-a251-4a197a543d98}</Project>
       <Name>TA03</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TCVS\TCVS.csproj">
+      <Project>{8cae9e0e-b36c-4c24-b924-a8f4f1574880}</Project>
+      <Name>TCVS</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
