@@ -36,9 +36,9 @@ namespace ApiVerificacionSuministroOrden.Models
         public static TCVS.TCVS ToTCVS(this Actualizacion origen)
         {
             return new TCVS.TCVS { TCNROP = origen.NumeroOrden ,
-                                   TCDPRO = origen.CodigoBarraProducto,
-                                   TCDEIX = origen.CodigoProducto,
-                                   TCDADI = origen.CodigoBarraAdicional,
+                                   TCDPRO = origen.CodigoBarraProducto?.ToUpper(),
+                                   TCDEIX = origen.CodigoProducto?.ToUpper(),
+                                   TCDADI = origen.CodigoBarraAdicional?.ToUpper(),
                                    TCFPRO = DateTime.Now.Year * 10000 + DateTime.Now.Month * 100 + DateTime.Now.Day,
                                    TCHPRO = DateTime.Now.Hour * 10000 + DateTime.Now.Minute * 100 + DateTime.Now.Second,
                                    TCUSRP = origen.credentials.Usuario,

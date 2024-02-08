@@ -79,7 +79,7 @@ namespace ApiVerificacionSuministroOrden.Controllers
             catch (Exception ex)
             {
                 // Crear una respuesta ApiResponse<T> indicando un error interno del servidor y devolverla
-                var errorResponse = new ApiResponse<IIML>(false, "Error interno del servidor", null);
+                var errorResponse = new ApiResponse<IIML>(false, $"Error interno del servidor ", null);
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, errorResponse);
             }
         }

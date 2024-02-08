@@ -23,8 +23,7 @@ namespace ApiVerificacionSuministroOrden.Controllers
             {
                 Tuple<string,bool> resp = new Tuple<string,bool>("Registro verificado", true);
                 //Linea de prueba
-                return Request.CreateResponse(HttpStatusCode.OK, new ApiResponse<bool>(resp.Item2, resp.Item1, false));
-
+                //return Request.CreateResponse(HttpStatusCode.OK, new ApiResponse<bool>(resp.Item2, resp.Item1, false));
                 IIML01_BLL producto = new IIML01_BLL();
                 productoActualizacion.Respuesta = false;
                 //1 - Validacion de codigo barra, se comprueba la existencia en la tablas de productos.
@@ -44,7 +43,7 @@ namespace ApiVerificacionSuministroOrden.Controllers
 
                 //2. - Valicacion del producto con el numero de orden de produccion
                 var validacionOrden = producto.GetOrdenValidacion2(productoActualizacion.NumeroOrden,
-                                                                   productoActualizacion.CodigoBarraProducto,
+                                                                   productoActualizacion.CodigoProducto,
                                                                    productoActualizacion.credentials.Usuario,
                                                                    productoActualizacion.credentials.Password);
                 if (!validacionOrden)
@@ -85,7 +84,7 @@ namespace ApiVerificacionSuministroOrden.Controllers
             catch (Exception ex)
             {
                 // Crear una respuesta ApiResponse<T> indicando un error interno del servidor y devolverla
-                var errorResponse = new ApiResponse<bool>(false, $"Error interno del servidor {ex.Message}", false);
+                var errorResponse = new ApiResponse<bool>(false, $"Error interno del servidor. {ex.Message}", false);
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, errorResponse);
             }
         }  

@@ -19,7 +19,7 @@ namespace TA03
             ConexionODBCTA03 oCon = new ConexionODBCTA03(UsuarioEmplSession);
             List<TA03> listadoUsuarios = oCon.getListadoTA03();
             var usuarioBusqueda = usuario == "RUANOTV6" ? "RUANOTV" : usuario;
-            oTA03 = listadoUsuarios.Where(p => p.Login == usuarioBusqueda).FirstOrDefault();
+            oTA03 = listadoUsuarios.Where(p => p.Login == usuarioBusqueda.ToUpper()).FirstOrDefault();
             oTA03.PasswordSistema = password;
             //Caso normal
             if (oTA03.EsJefe != "Y" && oTA03.EsGerente != "Y") {

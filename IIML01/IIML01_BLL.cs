@@ -110,7 +110,7 @@ namespace IIML01
             }
             catch (Exception exception)
             {
-                throw new Exception("Error al obtener los datos adicionales de validación.", exception);
+                throw new Exception($"Error al obtener los datos del producto para la validación {exception.Message}.", exception);
             }
 
             return new IIML();
@@ -280,7 +280,7 @@ namespace IIML01
             }
             catch (Exception exception)
             {
-                throw new Exception("Error al obtener datos adicionales.", exception);
+                throw new Exception($"Hay un problema al obtener datos adicionales. Message: {exception.Message}", exception);
             }
 
             return productos;
